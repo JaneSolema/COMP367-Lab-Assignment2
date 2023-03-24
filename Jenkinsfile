@@ -19,7 +19,14 @@ pipeline {
             }
         }
 
-        // other stages
+      stages{
+        stage('Build') {
+            steps {
+                git branch: 'main', url: 'https://github.com/JaneSplema/COMP367-LabAssignment2'
+                
+                bat "mvn clean compile"
+            }
+        }
     }
 }
         
