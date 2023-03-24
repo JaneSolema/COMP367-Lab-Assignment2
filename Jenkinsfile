@@ -1,24 +1,20 @@
-pipeline {
+pipeline{
     agent any
-
-    tools {
-        // Install the Maven version configured as "M3" and add it to the path.
+    
+    tools{
         maven "Maven3"
         jdk "JDK17"
+        
     }
-
-    stages {
+    
+    stages{
         stage('Build') {
             steps {
-                // Get some code from a GitHub repository
-                git branch: 'main', url: 'https://github.com/JaneSolema/COMP367-LabAssignment2'
-
-                // Run Maven on a Unix agent.
-                //sh "mvn -Dmaven.test.failure.ignore=true clean package"
-
-                // To run Maven on a Windows agent, use
-                 bat "mvn clean compile"
+                git branch: 'main', url: 'https://github.com/JaneSplema/COMP367-LabAssignment2'
+                
+                bat "mvn clean compile"
             }
-        }
-    }
+        }
+    }
 }
+        
