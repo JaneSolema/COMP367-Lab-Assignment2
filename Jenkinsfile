@@ -1,20 +1,25 @@
-pipeline{
+pipeline {
     agent any
-    
-    tools{
-        maven "Maven3"
-        jdk "JDK17"
-        
+
+    environment {
+        GITHUB_TOKEN = credentials('github-token')
     }
-    
-    stages{
-        stage('Build') {
+
+    stages {
+        stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/JaneSplema/COMP367-LabAssignment2'
-                
-                bat "mvn clean compile"
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[
+                        url: 'https://github.com/JaneSplema/COMP367-LabAssignment2.git',
+                        credentialsId: 'github-token'
+                    ]]
+                ])
             }
         }
+
+        // other stages
     }
 }
         
